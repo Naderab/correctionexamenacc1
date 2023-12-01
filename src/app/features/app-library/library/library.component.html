@@ -1,0 +1,31 @@
+Title : <input name="search" type="text" [(ngModel)]="searchText" (change)="search()"/>
+<div *ngFor="let book of listOfBooksFiltred">
+    <app-book [book]="book"></app-book>
+</div>
+
+<form [formGroup]="formBook" (ngSubmit)="addBook()">
+<table>   
+    <tr>
+        <td>Title</td>
+        <td><input type="text" formControlName="title"></td>
+    </tr>
+    <tr *ngIf="title!.invalid && (title!.touched || title!.dirty)">
+        <td *ngIf="title!.errors!['required']">Title is required</td>
+        <td *ngIf="title!.errors!['minlength']">Title must have at least 3 characters</td>
+
+    </tr>
+    <tr>
+        <td>Author</td>
+        <td><input type="text" formControlName="author"></td>
+    </tr>
+    <tr *ngIf="author!.invalid && (author!.touched || author!.dirty)">
+        <td *ngIf="author!.errors!['required']">Author is required</td>
+        <td *ngIf="author!.errors!['pattern']">Author accept only characters</td>
+    
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="submit" value="addBook"></td>
+    </tr>
+</table>
+</form>
